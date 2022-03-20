@@ -1,1 +1,1 @@
-# dynamoose-go
+# dynagoose

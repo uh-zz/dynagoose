@@ -12,7 +12,7 @@ Emulate dynamodb with docker for local verification
 
 ```
 docker pull amazon/dynamodb-local
-docker run -d --name dynamodb -p 8000:8000 amazon/dynamodb-local
+docker run -d --rm --name dynamodb -p 8000:8000 amazon/dynamodb-local
 ```
 
 ### aws cli
@@ -90,7 +90,7 @@ deleted item: {MyHash 1 My Second Text}
 Run the docker
 
 ```
-docker run -d --name dynamodb -p 8000:8000 amazon/dynamodb-local
+docker run -d --rm --name dynamodb -p 8000:8000 amazon/dynamodb-local
 ```
 
 If not create table yet

@@ -1,38 +1,13 @@
 package main
 
 import (
-	"os"
 	"testing"
-
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/guregu/dynamo"
 )
 
-func init() {
-	os.Setenv("DYNAMO_ENDPOINT", "http://localhost:8000")
-
-	dynamoDbRegion := os.Getenv("AWS_REGION")
-	disableSsl := false
-
-	dynamoDbEndpoint := os.Getenv("DYNAMO_ENDPOINT")
-	if len(dynamoDbEndpoint) != 0 {
-		disableSsl = true
-	}
-
-	if len(dynamoDbRegion) == 0 {
-		dynamoDbRegion = "ap-northeast-1"
-	}
-
-	// TODO: ここでモック化してもいいかも
-	Dynamo.Db = dynamo.New(session.New(), &aws.Config{
-		Region:     aws.String(dynamoDbRegion),
-		Endpoint:   aws.String(dynamoDbEndpoint),
-		DisableSSL: aws.Bool(disableSsl),
-	})
-}
-
 func TestCreate(t *testing.T) {
+	t.Setenv("DYNAMO_ENDPOINT", "http://localhost:8000")
+	InitDynamo()
+
 	table := Dynamo.Db.Table("MyFirstTable")
 	item := Item{
 		MyHashKey:  "MyHash",
@@ -46,6 +21,9 @@ func TestCreate(t *testing.T) {
 }
 
 func TestRead(t *testing.T) {
+	t.Setenv("DYNAMO_ENDPOINT", "http://localhost:8000")
+	InitDynamo()
+
 	table := Dynamo.Db.Table("MyFirstTable")
 	item := Item{
 		MyHashKey:  "MyHash",
@@ -64,6 +42,9 @@ func TestRead(t *testing.T) {
 }
 
 func TestUpdate(t *testing.T) {
+	t.Setenv("DYNAMO_ENDPOINT", "http://localhost:8000")
+	InitDynamo()
+
 	table := Dynamo.Db.Table("MyFirstTable")
 	item := Item{
 		MyHashKey:  "MyHash",
@@ -83,6 +64,9 @@ func TestUpdate(t *testing.T) {
 }
 
 func TestConditionalCheck(t *testing.T) {
+	t.Setenv("DYNAMO_ENDPOINT", "http://localhost:8000")
+	InitDynamo()
+
 	table := Dynamo.Db.Table("MyFirstTable")
 	item := Item{
 		MyHashKey:  "MyHash",
@@ -100,6 +84,9 @@ func TestConditionalCheck(t *testing.T) {
 }
 
 func TestDelete(t *testing.T) {
+	t.Setenv("DYNAMO_ENDPOINT", "http://localhost:8000")
+	InitDynamo()
+
 	table := Dynamo.Db.Table("MyFirstTable")
 	item := Item{
 		MyHashKey:  "MyHash",

@@ -21,7 +21,7 @@ type MyDynamo struct {
 
 var Dynamo MyDynamo
 
-func init() {
+func InitDynamo() {
 	dynamoDbRegion := os.Getenv("AWS_REGION")
 	disableSsl := false
 
@@ -42,6 +42,8 @@ func init() {
 }
 
 func main() {
+	InitDynamo()
+
 	table := Dynamo.Db.Table("MyFirstTable")
 	item := Item{
 		MyHashKey:  "MyHash",

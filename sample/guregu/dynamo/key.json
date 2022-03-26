@@ -1,0 +1,4 @@
+{
+  "MyHashKey": { "S": "MyHash" },
+  "MyRangeKey": { "N": "1" }
+}
